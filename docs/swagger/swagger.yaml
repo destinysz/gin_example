@@ -1,0 +1,143 @@
+definitions:
+  service.CreateRoleRequest:
+    properties:
+      name:
+        description: 角色名
+        example: 漏洞管理员
+        type: string
+    required:
+    - name
+    type: object
+  service.RoleResponse:
+    properties:
+      default:
+        type: boolean
+      id:
+        type: integer
+      name:
+        type: string
+    type: object
+  service.UpdateRoleRequest:
+    properties:
+      default:
+        description: 是否默认
+        example: false
+        type: boolean
+      name:
+        description: 角色名
+        example: 漏洞管理员
+        type: string
+    type: object
+info:
+  contact: {}
+  description: '用户管理: 多角色 多权限'
+  termsOfService: https://github.com
+  title: 用户管理
+  version: "1.0"
+paths:
+  /roles/:
+    get:
+      parameters:
+      - description: 角色名称
+        in: query
+        maxLength: 30
+        name: name
+        type: string
+      - default: 0
+        description: 分页起始位置
+        in: query
+        name: offset
+        type: integer
+      - default: 10
+        description: 每页数量 最大100
+        in: query
+        maximum: 100
+        name: limit
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/service.RoleResponse'
+      summary: 角色列表
+      tags:
+      - 角色
+    post:
+      parameters:
+      - description: body
+        in: body
+        name: body
+        required: true
+        schema:
+          $ref: '#/definitions/service.CreateRoleRequest'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: '{}'
+          schema:
+            type: string
+      summary: 添加角色
+      tags:
+      - 角色
+  /roles/{id}/:
+    delete:
+      parameters:
+      - description: id
+        in: path
+        name: id
+        required: true
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: '{}'
+          schema:
+            type: string
+      summary: 删除角色
+      tags:
+      - 角色
+    get:
+      parameters:
+      - description: id
+        in: path
+        name: id
+        required: true
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/service.RoleResponse'
+      summary: 角色详情
+      tags:
+      - 角色
+    put:
+      parameters:
+      - description: id
+        in: path
+        name: id
+        required: true
+        type: integer
+      - description: body
+        in: body
+        name: body
+        required: true
+        schema:
+          $ref: '#/definitions/service.UpdateRoleRequest'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: '{}'
+          schema:
+            type: string
+      summary: 修改角色
+      tags:
+      - 角色
+swagger: "2.0"

@@ -1,0 +1,28 @@
+Server:
+  RunMode: debug
+  HttpPort: 9001
+  ReadTimeout: 10
+  WriteTimeout: 10
+
+Mysql:
+  UserName: root  
+  Password: mysql
+  Host: 127.0.0.1
+  Port: 3306
+  Database: shan_user
+  TablePrefix: tb_
+  Charset: utf8mb4
+  LogMode: info # 日志级别
+  EnableFileLogWriter: false # 是否启用日志文件
+  LogFilename: sql.log # 日志文件名称
+
+Log:
+  Level: info # 日志等级
+  RootDir: ./logs # 日志根目录
+  Filename: app.log # 日志文件名称
+  Format: # 写入格式 可选json
+  ShowLine: true # 是否显示调用行
+  MaxBackups: 3 # 旧文件的最大个数
+  MaxSize: 500 # 日志文件最大大小（MB）
+  MaxAge: 28 # 旧文件的最大保留天数
+  Compress: true # 是否压缩
